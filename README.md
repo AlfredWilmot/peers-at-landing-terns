@@ -27,3 +27,21 @@
 
 ### References
 
+--- 
+[Abstract Base Classes vs Protocols](https://www.youtube.com/watch?v=xvb5hGLoK0A)
+```python
+'Abstract Base Classes' (abc) rely on "nominal typing" -> explicit typing
+via inheritance (concrete implementation of ABC inherits from the ABC)
+
+'Protocols' rely on "structural typing" (aka duck-typing) -> Python
+interprets the structure of objects that are used with protolcs:
+if they have the same properties/ methods as specified by the protocol,
+then they are treated as that protocol.
+A protocol defined an expected interface, there is no inheritance here.
+```
+---
+
+[Advanced Exception Handling](https://www.youtube.com/watch?v=ZsvftkbbrR0)
+```python
+
+```
