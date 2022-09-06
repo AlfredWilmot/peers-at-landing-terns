@@ -20,6 +20,10 @@
     ```
     (mine is):
     > Python 3.8.10
+- Install requirements with venv sources to finish setting it up:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ### References
 
