@@ -7,7 +7,7 @@ class JSONDataExtractor:
 
     def __init__(self,filepath):
         self.data = dict()
-        with openfile(filepath, mode='r', encoding='utf-8') as f:
+        with open(filepath, mode='r', encoding='utf-8') as f:
             self.data = json.load(f)
 
     @property
@@ -36,12 +36,14 @@ def data_extraction_factory(filepath):
     elif filepath.endswith('xml'):
         extractor = XMLDataExtractor
     else:
-        raise ValueError(f'cannot extract data from {filepath})
+        raise ValueError(f'cannot extract data from {filepath}')
     return extractor(filepath)
 
 
 def extract_data_from(filepath):
     """
+    Exception-handling wrapper for the factory method.
+    (this is to be used by client code)
     """
     factory_obj = None
     try:
