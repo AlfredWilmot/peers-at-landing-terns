@@ -14,6 +14,7 @@ class JSONDataExtractor:
     def parsed_data(self):
         return self.data
 
+
 class XMLDataExtractor:
     """ Extracts and parses data from *.xml files """
 
@@ -23,6 +24,7 @@ class XMLDataExtractor:
     @property
     def parsed_data(self):
         return self.tree
+
 
 def data_extraction_factory(filepath):
     """
@@ -36,3 +38,15 @@ def data_extraction_factory(filepath):
     else:
         raise ValueError(f'cannot extract data from {filepath})
     return extractor(filepath)
+
+
+def extract_data_from(filepath):
+    """
+    """
+    factory_obj = None
+    try:
+        factory_obj = data_extraction_factory(filepath)
+    except ValueError as e:
+        print(e)
+
+    return factory_obj
