@@ -1,5 +1,6 @@
 import json
-import xml.etree.ElementTree as etree
+from xml.etree import ElementTree
+import xmltodict
 
 
 class JSONDataExtractor:
@@ -19,11 +20,13 @@ class XMLDataExtractor:
     """ Extracts and parses data from *.xml files """
 
     def __init__(self,filepath):
-        self.tree = etree.parse(filepath)
+        self.data = dict()
+        with open(filepath, mode='r',encoding='utf-8') as f:
+            self.data = xmltodict.parse(f.read())
 
     @property
     def parsed_data(self):
-        return self.tree
+        return self.data
 
 
 def data_extraction_factory(filepath):
