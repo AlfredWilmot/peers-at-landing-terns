@@ -1,6 +1,13 @@
-import os
+import json
+import xml.etree.ElementTree as etree
 
-url = "https://www.sciencedaily.com/rss/all.xml"
-lynxcmd = f"lynx --dump {url}"
-xml = os.popen(lynxcmd).read()
-print(xml)
+
+class JSONDataExtractor:
+    def __init__(self,filepath):
+        self.data = dict()
+        with openfile(filepath, mode='r', encoding='utf-8') as f:
+            self.data = json.load(f)
+
+    @property
+    def parsed_data(self):
+        return self.data
