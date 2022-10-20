@@ -24,3 +24,15 @@ class XMLDataExtractor:
     def parsed_data(self):
         return self.tree
 
+def data_extraction_factory(filepath):
+    """
+    Factory method determines which extractor class to use
+    by looking at the file extension
+    """
+    if filepath.endswith('json'):
+        extractor = JSONDataExtractor
+    elif filepath.endswith('xml'):
+        extractor = XMLDataExtractor
+    else:
+        raise ValueError(f'cannot extract data from {filepath})
+    return extractor(filepath)
