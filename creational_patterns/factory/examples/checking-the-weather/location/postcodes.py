@@ -10,13 +10,15 @@ https://ideal-postcodes.co.uk/guides/postcode-validation
 @dataclass
 class PostCodeRegexes:
     """
-    A collection of postcode regexes from various sources:
+    Postcode regexes from:
        > https://ideal-postcodes.co.uk/guides/postcode-validation
        > https://gist.github.com/jamesbar2/1c677c22df8f21e869cca7e439fc3f5b
     """
 
-    uk : str    = r"^[a-zA-Z]{1,2}[0-9][a-zA-Z0-9]? *[0-9][a-zA-Z]{2}$"
+    uk : str = r"^[a-zA-Z]{1,2}[0-9][a-zA-Z0-9]? *[0-9][a-zA-Z]{2}$"
     china : str = r"^[0-9]{6}$"
+    iceland: str = r"^[0-9]{3}$"
+    andorra: str = r"^[Aa][Dd][0-9]{3}$"
 
     @property
     def list(self):
@@ -37,7 +39,7 @@ class PostCode(str):
     postcode: str
 
     def _raise_exception_if_postcode_invalid(self) -> None:
-        """ Does not guarantee the postcode is real, only that it matches a valid format. """
+        """ Does not guarantee the postcode is real, only that its format is valid. """
 
         if type(self.postcode) is not str:
             raise ValueError("postcode must be of type str")
