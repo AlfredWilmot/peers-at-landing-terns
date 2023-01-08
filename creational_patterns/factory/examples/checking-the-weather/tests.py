@@ -23,3 +23,8 @@ def test_uk_postcode_validation(test_postcode: str):
 def test_china_postcode_validation(test_postcode: str):
     print(test_postcode)
     assert PostCode(test_postcode)._raise_exception_if_postcode_invalid() is None
+
+@given(from_regex(PostCodeRegexes.andorra, fullmatch=True))
+def test_andorra_postcode_validation(test_postcode: str):
+    print(test_postcode)
+    assert PostCode(test_postcode)._raise_exception_if_postcode_invalid() is None
