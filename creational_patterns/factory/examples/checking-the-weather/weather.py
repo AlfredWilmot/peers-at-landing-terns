@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from dataclasses import dataclass
 from location.postcodes import PostCode
+import hypothesis
 
 
 # list of weather-forecast websites

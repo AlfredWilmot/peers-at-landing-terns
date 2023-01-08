@@ -6,6 +6,24 @@ Different methods of postcode validation:
 https://ideal-postcodes.co.uk/guides/postcode-validation
 """
 
+
+@dataclass
+class PostCodeRegexes:
+    """
+    A collection of postcode regexes from various sources:
+       > https://ideal-postcodes.co.uk/guides/postcode-validation
+       > https://gist.github.com/jamesbar2/1c677c22df8f21e869cca7e439fc3f5b
+    """
+
+    uk : str    = r"^[a-zA-Z]{1,2}[0-9][a-zA-Z0-9]? *[0-9][a-zA-Z]{2}$"
+    china : str = r"^[0-9]{6}$"
+
+    @property
+    def list(self):
+        """ returns a list of all the recorded regexes """
+        return list(self.__dict__.values())
+
+
 class InvalidPostCode(Exception):
     pass
 
@@ -18,27 +36,12 @@ class PostCode(str):
     """
     postcode: str
 
-    @property
-    def _list_of_valid_postcode_regexes(self) -> list[str]:
-        """ Add all postcode regexes to this list so they can be called internally. """
-
-        return [
-
-            # https://ideal-postcodes.co.uk/guides/postcode-validation
-            # (UK)
-            r"^[a-zA-Z]{1,2}\d[a-zA-Z\d]?\s*\d[a-zA-Z]{2}$",
-
-            # https://gist.github.com/jamesbar2/1c677c22df8f21e869cca7e439fc3f5b
-            # (China)
-            r"^\d{6}$",
-        ]
-
     def _raise_exception_if_postcode_invalid(self) -> None:
         """ Does not guarantee the postcode is real, only that it matches a valid format. """
 
         if type(self.postcode) is not str:
             raise ValueError("postcode must be of type str")
-        for regex in self._list_of_valid_postcode_regexes:
+        for regex in PostCodeRegexes().list:
             if type(re.search(regex, self.postcode)) is re.Match:
                 return None
         raise InvalidPostCode(
